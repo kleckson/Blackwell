@@ -1,0 +1,26 @@
+1 plane - 1 boss
+inventory
+warrior class
+2 npcs / plane
+(lore)
+
+
+spelare (1 dag)
+X	-Position	
+X	-HP
+28/5	-Movement
+		-Attack (requires enemy)
+kamera (1 dag)
+map	(?)
+	-(editor)
+enemies (
+	-HP
+	-(Boss abilities)
+	-Position
+inventory
+	-Item slots
+items
+	-Equipment
+npc
+	-Hints
+	-Position
