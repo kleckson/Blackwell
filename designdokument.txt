@@ -8,9 +8,9 @@ warrior class
 spelare (1 dag)
 X	-Position	
 X	-HP
-28/5	-Movement
+X 28/5	-Movement 
 		-Attack (requires enemy)
-kamera (1 dag)
+30/5? kamera (1 dag)
 map	(?)
 	-(editor)
 enemies (
