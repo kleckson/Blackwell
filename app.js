@@ -64,25 +64,72 @@ window.onload = function() {
 		}
 	}
 
-	function draw(){
-		ctx.clearRect(0, 0, WIDTH, HEIGHT);
-		if(rightPressed){
-			player.posX += 5;
-		}
-		else if (leftPressed) {
-			player.posX -= 5;
-		}
-		if (downPressed) {
-			player.posY += 5;
-		}
-		else if (upPressed) {
-			player.posY -= 5;
-		}
+	var mapImage = new Image(2000, 5000);
+	mapImage.onload = drawImage;
+	mapImage.src = "img/planes concept.png";
 
-		ctx.drawImage(playerImage, player.posX, player.posY);
-		requestAnimationFrame(draw);
+	
+	
+	
+
+	var lastFrameTimeMs = 0, maxFPS = 60;
+
+	var lastUpdate = Date.now();
+	var myInterval = setInterval(tick, 0);
+
+
+	function tick() {
+	    var now = Date.now();
+	    var dt = now - lastUpdate;
+	    lastUpdate = now;
+
+	    update(dt);
+	    draw(dt);
 	}
 
-	var player = new Player(50, 80, 200, 200, 50);
-	draw();
+	function draw(dt){
+			ctx.clearRect(0, 0, WIDTH, HEIGHT);
+			ctx.drawImage(mapImage, 0, 0);
+			ctx.drawImage(playerImage, player.posX, player.posY);
+			requestAnimationFrame(draw);
+		}
+
+	function update(dt) {
+		playerMovement();
+		draw();
+	}
+
+
+	/*function mainLoop(timestamp){
+		if (timestamp < lastFrameTimeMs + (1000 / maxFPS)) {
+			requestAnimationFrame(mainLoop);
+			return;
+		}
+		lastFrameTimeMs = timestamp;
+
+		playerMovement();
+		
+		requestAnimationFrame(mainLoop);
+	}*/
+
+	function playerMovement() {
+		if(rightPressed){
+			player.posX += 64;
+		}
+		else if (leftPressed) {
+			player.posX -= 64;
+		}
+		if (downPressed) {
+			player.posY += 64;
+		}
+		else if (upPressed) {
+			player.posY -= 64;
+		}
+	}
+
+
+	var player = new Player(50, 80, c.width / 2, c.height / 2, 50);
+	
+	update();
+		
 }
