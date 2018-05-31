@@ -3,86 +3,62 @@ window.onload = function() {
 	var c = document.getElementById("myCanvas");
 	var ctx = c.getContext("2d");
 
-	var HEIGHT = 920;
-	var WIDTH = 1280;
 
 	document.addEventListener('keydown', keyDownHandler, false);
 	document.addEventListener('keyup', keyUpHandler, false);
 
-	var rightPressed = false;
-	var leftPressed = false;
 	var upPressed = false;
-	var downPressed = false;
+
+	var pPosX = 100;
+	var pPosY = 500;
 
 	var playerImage = new Image(50, 80);
 	playerImage.onload = drawImage;
 	playerImage.src = "img/player.png";
 
+
 	function drawImage(){		
-		ctx.drawImage(this, player.posX, player.posY);
+		ctx.drawImage(this, pPosX, pPosY);
 	}
 
-
-	class Player {
-		constructor(width, height, posX, posY, health){
-			this.width = width;
-			this.height = height;
-			this.health = health;
-			this.posX = posX;
-			this.posY = posY;
-		}		
-	}
+	var timeLapsed = new Date();
 
 	function keyDownHandler(event){
+		var dt = Date.now();
+		if ((dt - timeLapsed) > 300){
 			if (event.keyCode == 87) {
-				upPressed = true;
+				pPosY -= 64;
 			}
 			else if (event.keyCode == 83) {
-				downPressed = true;
+				pPosY += 64;
 			}
 			if (event.keyCode == 68) {
-				rightPressed = true;
+				pPosX += 64;
 			}
 			else if (event.keyCode == 65) {
-				leftPressed = true;
+				pPosX -= 64;
 			}
-			console.log(player.posX);
+			timeLapsed = new Date();
 		}
+		
+	}
 
 	function keyUpHandler(event){
 		if (event.keyCode == 87) {
 			upPressed = false;
 		}
-		else if (event.keyCode == 83) {
-			downPressed = false;
-		}
-		if (event.keyCode == 68) {
-			rightPressed = false;
-		}
-		else if (event.keyCode == 65) {
-			leftPressed = false;
-		}
 	}
 
 	function draw(){
-		ctx.clearRect(0, 0, WIDTH, HEIGHT);
-		if(rightPressed){
-			player.posX += 5;
-		}
-		else if (leftPressed) {
-			player.posX -= 5;
-		}
-		if (downPressed) {
-			player.posY += 5;
-		}
-		else if (upPressed) {
-			player.posY -= 5;
-		}
-
-		ctx.drawImage(playerImage, player.posX, player.posY);
+		ctx.clearRect(0, 0, c.width, c.height);
+		ctx.drawImage(playerImage, pPosX, pPosY);
 		requestAnimationFrame(draw);
 	}
 
-	var player = new Player(50, 80, 200, 200, 50);
+
+	function coolDownFunc(){
+		
+	}
+
 	draw();
 }
