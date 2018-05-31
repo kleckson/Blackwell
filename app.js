@@ -13,15 +13,20 @@ window.onload = function() {
 	var pPosY = 500;
 
 	var playerImage = new Image(50, 80);
-	playerImage.onload = drawImage;
+	playerImage.onload = drawPlayer;
 	playerImage.src = "img/player.png";
 
-	//var currentBackground = new Image(c.width, c.height);
-	//currentBackground.onload = drawImage;
+	var currentBackground = new Image(c.width, c.height);
+	currentBackground.onload = drawBackground;
+	currentBackground.src = "img/bigbackground.png";
 
 
-	function drawImage(){		
+	function drawPlayer(){		
 		ctx.drawImage(this, pPosX, pPosY);
+	}
+
+	function drawBackground() {
+		ctx.drawImage(this, 0, 0);
 	}
 
 	var timeLapsed = new Date();
@@ -54,6 +59,7 @@ window.onload = function() {
 
 	function draw(){
 		ctx.clearRect(0, 0, c.width, c.height);
+		ctx.drawImage(currentBackground, 0, 0);
 		ctx.drawImage(playerImage, pPosX, pPosY);
 		requestAnimationFrame(draw);
 	}
